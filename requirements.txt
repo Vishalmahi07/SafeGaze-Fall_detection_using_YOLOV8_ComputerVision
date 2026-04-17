@@ -6,3 +6,5 @@ twilio
 python-multipart
 pillow
 python-dotenv
+itsdangerous
+google-generativeai

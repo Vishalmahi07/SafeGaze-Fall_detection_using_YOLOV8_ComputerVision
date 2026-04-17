@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeGaze — Dashboard</title>
+    <meta name="description" content="SafeGaze AI-Powered Fall Detection System Dashboard">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/dashboard.css">
+    <link rel="stylesheet" href="/static/chat.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-icon">
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="18" stroke="url(#sb-grad)" stroke-width="2.5"/>
+                    <path d="M13 20 L20 13 L27 20 L20 30 Z" fill="url(#sb-grad)" opacity="0.9"/>
+                    <path d="M20 13 L20 30" stroke="white" stroke-width="1.5" opacity="0.4"/>
+                    <defs>
+                        <linearGradient id="sb-grad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#60a5fa"/>
+                            <stop offset="1" stop-color="#818cf8"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <span>SafeGaze</span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="/dashboard" class="nav-item active" id="nav-overview">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                    <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+                </svg>
+                Overview
+            </a>
+            <a href="/monitor" class="nav-item" id="nav-monitor">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10z"/>
+                    <path d="M22 12H18M6 12H2M12 6V2M12 22v-4"/>
+                </svg>
+                Live Monitor
+            </a>
+            <a href="#" class="nav-item" id="nav-alerts">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                </svg>
+                Alerts
+                <span class="nav-badge" id="nav-alert-count">0</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">A</div>
+                <div class="user-details">
+                    <span class="user-name">Admin</span>
+                    <span class="user-role">System Administrator</span>
+                </div>
+            </div>
+            <a href="/logout" class="logout-btn" title="Logout">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                    <polyline points="16 17 21 12 16 7"/>
+                    <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Top Bar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                </button>
+                <div class="page-breadcrumb">
+                    <span class="breadcrumb-root">SafeGaze</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                    <span class="breadcrumb-current">Overview</span>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <div class="live-indicator">
+                    <span class="live-dot"></span>
+                    System Online
+                </div>
+                <a href="/logout" class="topbar-logout">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                        <polyline points="16 17 21 12 16 7"/>
+                        <line x1="21" y1="12" x2="9" y2="12"/>
+                    </svg>
+                    Logout
+                </a>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-text">
+                    <div class="hero-eyebrow">AI-Powered Safety Monitoring</div>
+                    <h1 class="hero-title">SafeGaze Fall<br>Detection System</h1>
+                    <p class="hero-subtitle">Real-time fall detection using YOLOv8 pose estimation with instant SMS and email alerts to protect those who matter most.</p>
+                    <div class="hero-actions">
+                        <a href="/monitor" class="btn-primary" id="launch-monitor-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10z"/>
+                            </svg>
+                            Launch Live Monitor
+                            <svg class="btn-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </a>
+                        <button class="btn-secondary" id="test-alert-dash-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                            </svg>
+                            Test Alert
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="shield-ring shield-ring-outer"></div>
+                    <div class="shield-ring shield-ring-mid"></div>
+                    <div class="shield-ring shield-ring-inner"></div>
+                    <div class="shield-center">
+                        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="80" height="80">
+                            <path d="M40 8 L68 20 L68 44 C68 58 55 68 40 72 C25 68 12 58 12 44 L12 20 Z" fill="url(#shield-grad)" opacity="0.9"/>
+                            <path d="M28 40 L36 48 L52 32" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                            <defs>
+                                <linearGradient id="shield-grad" x1="12" y1="8" x2="68" y2="72" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#3b82f6"/>
+                                    <stop offset="1" stop-color="#6366f1"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <!-- Floating labels -->
+                    <div class="float-badge float-badge-1">
+                        <span class="dot dot-green"></span>YOLOv8 Active
+                    </div>
+                    <div class="float-badge float-badge-2">
+                        <span class="dot dot-blue"></span>Pose Tracking
+                    </div>
+                    <div class="float-badge float-badge-3">
+                        <span class="dot dot-purple"></span>SMS + Email Alerts
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Row -->
+            <section class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-blue">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="stat-uptime">–</div>
+                        <div class="stat-label">System Uptime</div>
+                    </div>
+                    <div class="stat-trend stat-trend-up">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                        Online
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-green">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="stat-status">–</div>
+                        <div class="stat-label">Current Status</div>
+                    </div>
+                    <div class="stat-trend stat-trend-neutral" id="stat-status-trend">Monitoring</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-red">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-value" id="stat-alerts">–</div>
+                        <div class="stat-label">Total Alerts Logged</div>
+                    </div>
+                    <div class="stat-trend stat-trend-neutral">All time</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon stat-icon-purple">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-value">YOLOv8n</div>
+                        <div class="stat-label">Detection Model</div>
+                    </div>
+                    <div class="stat-trend stat-trend-up">Pose Est.</div>
+                </div>
+            </section>
+
+            <!-- Bottom Row -->
+            <section class="bottom-row">
+                <!-- Launch Monitor Card -->
+                <div class="monitor-launch-card" id="monitor-launch-card">
+                    <div class="mlc-glow"></div>
+                    <div class="mlc-content">
+                        <div class="mlc-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="40" height="40">
+                                <path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.87v6.26a1 1 0 0 1-1.447.894L15 14M3 8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/>
+                            </svg>
+                        </div>
+                        <h3>Live Monitor</h3>
+                        <p>View the real-time webcam feed with YOLOv8 pose overlay and fall detection status</p>
+                        <a href="/monitor" class="mlc-btn" id="mlc-launch-btn">
+                            Open Live Feed
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                                <polyline points="12 5 19 12 12 19"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="mlc-preview">
+                        <div class="preview-screen">
+                            <div class="preview-scanline"></div>
+                            <div class="preview-label">LIVE</div>
+                            <div class="preview-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Alerts Panel -->
+                <div class="alerts-panel">
+                    <div class="panel-header">
+                        <h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                            </svg>
+                            Recent Alerts
+                        </h3>
+                        <span class="panel-badge" id="alerts-count-badge">0</span>
+                    </div>
+
+                    <div class="alerts-list" id="alerts-list">
+                        <div class="alerts-empty" id="alerts-empty">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="36" height="36">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                            <p>No alerts logged yet</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="/static/dashboard.js"></script>
+    <script src="/static/chat.js"></script>
+</body>
+</html>

@@ -7,6 +7,8 @@ load_dotenv()
 # Twilio Configuration
 TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID", "")
 TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN", "")
+TWILIO_API_KEY = os.getenv("TWILIO_API_KEY", "")
+TWILIO_API_SECRET = os.getenv("TWILIO_API_SECRET", "")
 TWILIO_FROM = os.getenv("TWILIO_FROM", "")
 GUARDIAN_PHONE = os.getenv("GUARDIAN_PHONE", "")
 

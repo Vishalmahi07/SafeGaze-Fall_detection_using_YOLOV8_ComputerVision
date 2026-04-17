@@ -1,3 +1,32 @@
+# Secrets — NEVER commit these
 .env
+
+# Python
 .venv/
 __pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Data & generated files
+fall_detection.db
+snapshots/
+
+# Model weights (large binary — download separately)
+*.pt
+
+# IDE / OS
+.DS_Store
+.vscode/
+.idea/
+Thumbs.db
+
+# Docker
+.dockerignore
+
+# Logs
+*.log

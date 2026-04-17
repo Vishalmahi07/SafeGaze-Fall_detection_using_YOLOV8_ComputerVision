@@ -6,13 +6,20 @@ def send_sms_alert(message: str):
     """
     Sends an SMS alert using the Twilio API.
     """
-    if not config.TWILIO_ACCOUNT_SID or not config.TWILIO_AUTH_TOKEN:
-        print("[WARN] Twilio credentials not configured. SMS not sent.")
+    if not config.TWILIO_ACCOUNT_SID:
+        print("[WARN] Twilio Account SID not configured. SMS not sent.")
         return False
         
     try:
-        client = Client(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN)
-        
+        # Check if using API Key/Secret or standard Auth Token
+        if config.TWILIO_API_KEY and config.TWILIO_API_SECRET:
+            client = Client(username=config.TWILIO_API_KEY, password=config.TWILIO_API_SECRET, account_sid=config.TWILIO_ACCOUNT_SID)
+        elif config.TWILIO_AUTH_TOKEN:
+            client = Client(config.TWILIO_ACCOUNT_SID, config.TWILIO_AUTH_TOKEN)
+        else:
+            print("[WARN] Twilio credentials (Auth Token or API Key/Secret) not configured. SMS not sent.")
+            return False
+            
         message_obj = client.messages.create(
             body=message,
             from_=config.TWILIO_FROM,

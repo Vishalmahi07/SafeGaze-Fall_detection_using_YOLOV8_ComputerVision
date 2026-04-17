@@ -12,7 +12,17 @@ class PoseModel:
             raise e
 
     def predict(self, frame):
-        """Runs inference on a single frame."""
-        # conf=0.5 can be tweaked, using low-medium confidence to ensure detection
-        results = self.model(frame, conf=0.5, verbose=False)
+        """
+        Runs inference on a single frame.
+        
+        conf=0.35 — Lowered from 0.5 so the model still detects people who are
+        partially out-of-frame, lying down, or at unusual angles.
+        iou=0.45  — Slightly relaxed NMS so overlapping detections are not pruned.
+        """
+        results = self.model(
+            frame,
+            conf=0.35,      # was 0.5 — more sensitive person detection
+            iou=0.45,       # NMS IoU threshold
+            verbose=False,
+        )
         return results
